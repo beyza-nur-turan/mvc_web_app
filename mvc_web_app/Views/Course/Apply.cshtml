@@ -1,0 +1,51 @@
+@model MVC_WEB_APP.Models.Candidate
+
+<div class="display-6"> Apply</div>
+<form>
+    <div class="form-group my-2">
+        <label>E-Mail</label>
+        <input name="email" class="form-control" />
+    </div>
+    <div class="form-group my-2">
+        <label>FirstName</label>
+        <input name="firstName" class="form-control" />
+    </div>
+    <div class="form-group my-2">
+        <label>LastName</label>
+        <input name="lastName" class="form-control" />
+    </div>
+    <div class="form-group my-2">
+        <label>Age</label>
+        <select name="age" class="form-control">
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+        </select>
+    </div>
+    <fieldset>
+        <legend>Select one course</legend>
+        <p>
+            <input id="mvc" type="radio" name="SelectedCourse" value="ASP.NET CORE MVC"/>
+            <label>ASP.NET CORE MVC</label>
+        </p>
+        <p>
+            <input id="python" type="radio" name="SelectedCourse" value="Python"/>
+            <label>Python</label>
+        </p>
+        <p>
+            <input id="react" type="radio" name="SelectedCourse" value="React"/>
+            <label>React</label>
+        </p>
+        <p>
+            <input id="c#" type="radio" name="SelectedCourse" value="C#"/>
+            <label>C#</label>
+        </p>
+    </fieldset>
+    <div>
+        <button class="btn btn-primary">Apply</button>
+        <a href="/" class="btn btn-warning">Home</a>
+    </div>
+</form>
