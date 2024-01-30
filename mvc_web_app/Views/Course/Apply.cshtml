@@ -1,7 +1,8 @@
 @model MVC_WEB_APP.Models.Candidate
 
 <div class="display-6"> Apply</div>
-<form>
+<form method="post" asp-action="Apply">
+    <div class="text-danger" asp-validation-summary="All"></div>
     <div class="form-group my-2">
         <label>E-Mail</label>
         <input name="email" class="form-control" />
@@ -28,24 +29,24 @@
     <fieldset>
         <legend>Select one course</legend>
         <p>
-            <input id="mvc" type="radio" name="SelectedCourse" value="ASP.NET CORE MVC"/>
+            <input id="mvc" type="radio" asp-for="SelectedCourse" value="ASP.NET CORE MVC" checked/>
             <label>ASP.NET CORE MVC</label>
         </p>
         <p>
-            <input id="python" type="radio" name="SelectedCourse" value="Python"/>
+            <input id="python" type="radio" asp-for="SelectedCourse" value="Python"/>
             <label>Python</label>
         </p>
         <p>
-            <input id="react" type="radio" name="SelectedCourse" value="React"/>
+            <input id="react" type="radio" asp-for="SelectedCourse" value="React"/>
             <label>React</label>
         </p>
         <p>
-            <input id="c#" type="radio" name="SelectedCourse" value="C#"/>
+            <input id="c#" type="radio" asp-for="SelectedCourse" value="C#"/>
             <label>C#</label>
         </p>
     </fieldset>
     <div>
         <button class="btn btn-primary">Apply</button>
-        <a href="/" class="btn btn-warning">Home</a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-warning">Home</a>
     </div>
 </form>
