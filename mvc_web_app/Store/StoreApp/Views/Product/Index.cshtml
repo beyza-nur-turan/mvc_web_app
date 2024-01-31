@@ -1,0 +1,18 @@
+
+@model List<Product>
+    @section Footer{
+        <div>
+            only for index footer
+        </div>
+    }
+
+@foreach (Product prd in Model)
+{
+    <div>
+        <h3>@prd.productName</h3>
+        <p>@prd.price</p>
+        <p>
+            <a href="product/get/@prd.productId">Get details</a>
+        </p>
+    </div>
+}
