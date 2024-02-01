@@ -1,18 +1,9 @@
-
 @model List<Product>
-    @section Footer{
-        <div>
-            only for index footer
-        </div>
-    }
-
-@foreach (Product prd in Model)
+    <div class="row my-3">
+@foreach(Product prd in Model)
 {
-    <div>
-        <h3>@prd.productName</h3>
-        <p>@prd.price</p>
-        <p>
-            <a href="product/get/@prd.productId">Get details</a>
-        </p>
-    </div>
+    
+        @await Html.PartialAsync("_ProductCard.cshtml",prd)
+    
 }
+</div>

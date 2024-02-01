@@ -4,10 +4,24 @@
 
 namespace StoreApp.Migrations
 {
-    public partial class ProductSeedData : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    productId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    productName = table.Column<string>(type: "TEXT", nullable: false),
+                    price = table.Column<decimal>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.productId);
+                });
+
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "productId", "price", "productName" },
@@ -36,30 +50,8 @@ namespace StoreApp.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "productId",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "productId",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "productId",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "productId",
-                keyValue: 4);
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "productId",
-                keyValue: 5);
+            migrationBuilder.DropTable(
+                name: "Products");
         }
     }
 }
