@@ -15,7 +15,7 @@ namespace Services
 
         public IEnumerable<Category> GetAllCategories(bool trackChanges)
         {
-            return _manager.Category.FindAll(trackChanges);
+            return _manager.Category.FindAll(trackChanges); 
         }
     }
 }
