@@ -3,29 +3,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Entities.Models;
+using Repositories.Contracts;
 
 namespace StoreApp.Controllers
  {
     public class ProductController:Controller
     {
-        private readonly RepositoryContext _context;
+        private readonly IRepositoryManager _manager;
 
         //dependency injection patterni kullanılarak bilgi alma kullanma
-        public ProductController(RepositoryContext context)
-        { //oluşturulan repositorycontext örneği _context değişkenine atanıyor. böylece oaradaki verileri alabiliyoruz.
-            _context = context;
+        public ProductController(IRepositoryManager manager)
+        { 
+            _manager = manager;
         }
 
         public IActionResult Index() //tüm ürünleri listeler
         {
             
-            var model = _context.Products.ToList();
+            var model = _manager.Product.GetAllProducts(false).ToList();
             return View(model);
         }
         public IActionResult Get(int id) //id ye göre ürün getirir
         {
-            Product product=_context.Products.First(p=>p.productId.Equals(id));//dbdeki id ile eşleşen ilk değeri ver
-            return View(product);
+            var model= _manager.Product.GetOneProduct(id,false);
+            return View(model);
         }
 
     }

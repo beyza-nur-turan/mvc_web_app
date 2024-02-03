@@ -7,7 +7,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/Home/Index">Home</a>
-        <a class="nav-link" href="/Product/Index">Products</a>
+        <a class="nav-link" asp-controller="Product" asp-action="Index">Products</a>
+        <a class="nav-link" asp-controller="Category" asp-action="Index">Categories</a>
         <form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button>
