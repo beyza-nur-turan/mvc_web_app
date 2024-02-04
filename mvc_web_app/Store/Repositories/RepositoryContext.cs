@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Entities.Models; // Doğru isim uzayını ekleyin
+using Entities.Models;
+using Repositories.Config;
+using System.Reflection;
 
 namespace Repositories
 {
@@ -16,19 +18,12 @@ namespace Repositories
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Product>()
-                .HasData(
-                    new Product() { productId = 1, productName = "Computer", price = 20_000 },
-                    new Product() { productId = 2, productName = "Keyboard", price = 1_000 },
-                    new Product() { productId = 3, productName = "Mouse", price = 500 },
-                    new Product() { productId = 4, productName = "Monitor", price = 10_000 },
-                    new Product() { productId = 5, productName = "Deck", price = 1_500 }
-                );
-            modelBuilder.Entity<Category>()
-            .HasData(
-                new Category() { CategoryId = 1, CategoryName = "Books" },
-                new Category() { CategoryId = 2, CategoryName = "Electronic" }
-            );
-        }
+            //alternatif yol
+            // modelBuilder.ApplyConfiguration(new ProductConfig());
+            // modelBuilder.ApplyConfiguration(new CategoryConfig());
+           //üstteki yolda hepsini tek tek tanımlamamız gerekecekti ama altta 
+           //ne kadar varsa hepsinin ayarlamasını yapıyor.
+           modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); 
+        } 
     }
 }
