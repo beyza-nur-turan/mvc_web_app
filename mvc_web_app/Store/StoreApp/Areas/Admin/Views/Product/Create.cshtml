@@ -1,10 +1,17 @@
-@model Product
+@model ProductDtoForInsertion
 
 <div class="text-center">
     <div class="display-6">Create</div>
 </div>
 <form method="post" asp-action="Create">
     <div class="text-danger" asp-validation-summary="All"></div>
+
+    <div class="form-group my-3">
+        <label asp-for="CategoryId" class="my-3">Category Area:</label>
+        <select class="form-control" asp-items="@ViewBag.Categories" asp-for="CategoryId">
+            
+        </select>
+    </div>
     <div class="form-group">
         <label class="my-2" asp-for="productName">Product Name:</label>
         <input asp-for="productName" class="form-control" />

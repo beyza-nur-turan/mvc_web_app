@@ -17,6 +17,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IProductService, ProductManager>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
+
+builder.Services.AddAutoMapper(typeof(Program));//automapper service kaydı gerçekleştirildi. böylece automapper kullanılabilecek
 var app = builder.Build();
 app.UseStaticFiles();//wwwroot klasörünü kullanılabilir hale getirdik
 app.UseHttpsRedirection();
