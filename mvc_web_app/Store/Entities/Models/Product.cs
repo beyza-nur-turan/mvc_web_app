@@ -8,6 +8,8 @@ public class Product
     public String productName { get; set; } = String.Empty;
     
     public decimal price { get; set; }
+    public String? Summary { get; set; }=String.Empty;
+    public String? ImageUrl { get; set; }
     public int? CategoryId {get;set;}
     public Category? category {get;set;}
 }
