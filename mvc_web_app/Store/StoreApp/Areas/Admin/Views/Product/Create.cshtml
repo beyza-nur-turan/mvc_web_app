@@ -3,7 +3,8 @@
 <div class="text-center">
     <div class="display-6">Create</div>
 </div>
-<form method="post" asp-action="Create">
+@* enctype="multipart/form-data" bunu ile dosyayı sorun yaşamadan göndereceğiz *@
+<form method="post" asp-action="Create" enctype="multipart/form-data">
     <div class="text-danger" asp-validation-summary="All"></div>
 
     <div class="form-group my-3">
@@ -16,9 +17,17 @@
         <label class="my-2" asp-for="productName">Product Name:</label>
         <input asp-for="productName" class="form-control" />
     </div>
+    <div class="form-group">
+        <label class="my-2" asp-for="Summary">Summary:</label>
+        <input asp-for="Summary" class="form-control" />
+    </div>
     <div class="form-group my-3">
         <label class="my-2" asp-for="price">Price:</label>
         <input asp-for="price" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label class="my-2" asp-for="ImageUrl">Image url:</label>
+        <input name="file" type="file" class="form-control" />
     </div>
     <div class="form-group my-3 text-center">
         <div class="btn-group">

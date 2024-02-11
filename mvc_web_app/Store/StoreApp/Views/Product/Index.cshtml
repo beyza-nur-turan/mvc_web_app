@@ -4,13 +4,13 @@
         @await Component.InvokeAsync("CategoriesMenu")
     </div>
     <div class="col-md-9">
-        @foreach(Product prd in Model)
-{
-    
-        @await Html.PartialAsync("_ProductCard.cshtml",prd)
-    
-}
+        <div class="row my-3">
+            @foreach (Product prd in Model)
+            {
+
+                @await Html.PartialAsync("_ProductCard.cshtml", prd)
+
+            }
+        </div>
     </div>
 </div>
-
-    

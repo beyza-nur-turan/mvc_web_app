@@ -11,8 +11,8 @@ using Repositories;
 namespace StoreApp.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240204184134_init")]
-    partial class init
+    [Migration("20240205124343_start")]
+    partial class start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,12 @@ namespace StoreApp.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Summary")
+                        .HasColumnType("TEXT");
+
                     b.Property<decimal>("price")
                         .HasColumnType("TEXT");
 
@@ -73,6 +79,8 @@ namespace StoreApp.Migrations
                         {
                             productId = 1,
                             CategoryId = 2,
+                            ImageUrl = "/images/computer.jpg",
+                            Summary = "",
                             price = 20000m,
                             productName = "Computer"
                         },
@@ -80,6 +88,8 @@ namespace StoreApp.Migrations
                         {
                             productId = 2,
                             CategoryId = 2,
+                            ImageUrl = "/images/keyboard.jpg",
+                            Summary = "",
                             price = 1000m,
                             productName = "Keyboard"
                         },
@@ -87,6 +97,8 @@ namespace StoreApp.Migrations
                         {
                             productId = 3,
                             CategoryId = 2,
+                            ImageUrl = "/images/mouse.jpg",
+                            Summary = "",
                             price = 500m,
                             productName = "Mouse"
                         },
@@ -94,6 +106,8 @@ namespace StoreApp.Migrations
                         {
                             productId = 4,
                             CategoryId = 2,
+                            ImageUrl = "/images/default.jpg",
+                            Summary = "",
                             price = 10000m,
                             productName = "Monitor"
                         },
@@ -101,6 +115,8 @@ namespace StoreApp.Migrations
                         {
                             productId = 5,
                             CategoryId = 2,
+                            ImageUrl = "/images/deck.jpg",
+                            Summary = "",
                             price = 1500m,
                             productName = "Deck"
                         },
@@ -108,15 +124,19 @@ namespace StoreApp.Migrations
                         {
                             productId = 6,
                             CategoryId = 1,
+                            ImageUrl = "/images/yagmursonrasi.jpg",
+                            Summary = "",
                             price = 150m,
-                            productName = "Detective"
+                            productName = "Yağmur Sonrası"
                         },
                         new
                         {
                             productId = 7,
                             CategoryId = 1,
+                            ImageUrl = "/images/bogurtlenkisi.jpg",
+                            Summary = "",
                             price = 200m,
-                            productName = "History"
+                            productName = "Böğürtlen Kışı"
                         });
                 });
 

@@ -35,10 +35,20 @@ namespace StoreApp.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([FromForm] ProductDtoForInsertion productDto)
+        public async Task<IActionResult> Create([FromForm] ProductDtoForInsertion productDto, IFormFile file)//ıformfile ı dosya yüklemesi için tanımladık
         {
             if (ModelState.IsValid)
             {
+                //file operations
+                string path=Path.Combine(Directory.GetCurrentDirectory(),
+                "wwwroot","images",file.FileName);
+
+                using (var stream=new FileStream(path,FileMode.Create)) //dosya oluşturuyor.zaten varsa üstüne yazar
+                {
+                    await file.CopyToAsync(stream);
+                }
+                productDto.ImageUrl=String.Concat("/images/",file.FileName);//burda set ediyoruz. yukarda belli bir yol tanımladık 
+                //ama bu productdb de images/filename olarak tanımlı bu nedenle birleştirip set ettik
                 _manager.ProductService.CreateProduct(productDto);
                 return RedirectToAction("Index");
             }
@@ -52,11 +62,20 @@ namespace StoreApp.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update([FromForm] ProductDtoForUpdate product)
+        public async Task< IActionResult> Update([FromForm] ProductDtoForUpdate productDto,IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                _manager.ProductService.UpdateOneProduct(product);
+                //file operations
+                string path=Path.Combine(Directory.GetCurrentDirectory(),
+                "wwwroot","images",file.FileName);
+
+                using (var stream=new FileStream(path,FileMode.Create)) //dosya oluşturuyor.zaten varsa üstüne yazar
+                {
+                    await file.CopyToAsync(stream);
+                }
+                productDto.ImageUrl=String.Concat("/images/",file.FileName);//burda set ediyoruz. yukarda belli bir yol tanımladık 
+                _manager.ProductService.UpdateOneProduct(productDto);
                 return RedirectToAction("Index");
             }
             return View();
