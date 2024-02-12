@@ -6,6 +6,7 @@ using Services.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();//controller olmadanda razer pageleri kullanabilecek bir servisi uygulamaya dahil ettik
 builder.Services.AddDbContext<RepositoryContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("sqlconnection"),
@@ -27,6 +28,7 @@ app.UseEndpoints(endpoints =>
 {   
     endpoints.MapAreaControllerRoute("Admin","Admin","Admin/{controller=Dashboard}/{action=Index}/{id?}");
     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapRazorPages();
 });
 
 
