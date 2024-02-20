@@ -13,6 +13,10 @@ builder.Services.AddDbContext<RepositoryContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("sqlconnection"),
     b => b.MigrationsAssembly("StoreApp"));
 });
+//session için aşağıdaki kaydı konteynıra yapmamız lazım
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -26,6 +30,7 @@ var app = builder.Build();
 app.UseStaticFiles();//wwwroot klasörünü kullanılabilir hale getirdik
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseSession();
 app.UseEndpoints(endpoints =>
 {   
     endpoints.MapAreaControllerRoute("Admin","Admin","Admin/{controller=Dashboard}/{action=Index}/{id?}");
