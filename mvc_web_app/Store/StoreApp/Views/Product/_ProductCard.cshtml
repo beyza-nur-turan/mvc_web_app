@@ -9,7 +9,7 @@
             <div class="btn btn-group">
                 <form id="@Model.productId" class="btn btn-primary mt-auto mx-3" asp-page="/cart" method="post">
                     <input type="hidden" asp-for="productId"/>
-                    <input type="hidden" name="returnUrl" value="/Product/Get/@Model.productId"/>
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
                     <button style="width: 20px;height:25px;color:white;" type="submit"
                         class="btn btn-outline d-flex align-items-center justify-content-center"><i
                             class="fa fa-cart-plus"></i></button>

@@ -4,6 +4,7 @@ using Repositories;
 using Repositories.Contracts;
 using Services;
 using Services.Contracts;
+using StoreApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
@@ -15,7 +16,17 @@ builder.Services.AddDbContext<RepositoryContext>(options =>
 });
 //session için aşağıdaki kaydı konteynıra yapmamız lazım
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession();
+builder.Services.AddSession(options=>
+{
+    options.Cookie.Name="StoreApp.Session";
+    options.IdleTimeout=TimeSpan.FromMinutes(10);//10 dk bu bilgileri tut.10dk sonra yeni istek gelmediyse oturumu kapat dedik
+});
+//IHttpContextAccessor arayüzünü uygulayan HttpContextAccessor sınıfını, uygulamanın servis
+// koleksiyonuna ekler. Bu, uygulama içinde HttpContext nesnesine erişim sağlamak için kullanılır.
+//IHttpContextAccessor, HTTP istekleri ve yanıtları ile ilgili bilgilere erişim sağlar ve
+// genellikle middleware veya servis sınıfları tarafından kullanılır. Bu nesne, örneğin kullanıcının
+// IP adresi, tarayıcı bilgileri ve diğer HTTP bağlam bilgilerine erişim sağlar.
+builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
 
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -24,7 +35,10 @@ builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IProductService, ProductManager>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
-builder.Services.AddSingleton<Cart>(); //bir cart nesnesi newlenecek ve herkes aynı sepeti kullanacak
+builder.Services.AddScoped<Cart>(c=>SessionCart.GetCart(c)); //buraya addsingleton deseydim o zaman sepet her yerde aynı olacaktı.
+//bu ne demek yani atıyorum chromede sepete bir şey eklediğimizde bunu edge de açan kullanıcıda görecekti halbuki bu kullanıcı farklı
+//yani addscoped ile her kullanıcı için ayrı bir cart nesnesi oluşturulacak
+
 builder.Services.AddAutoMapper(typeof(Program));//automapper service kaydı gerçekleştirildi. böylece automapper kullanılabilecek
 var app = builder.Build();
 app.UseStaticFiles();//wwwroot klasörünü kullanılabilir hale getirdik

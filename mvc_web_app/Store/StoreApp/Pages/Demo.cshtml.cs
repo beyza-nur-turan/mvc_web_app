@@ -15,6 +15,7 @@ namespace StoreApp.Pages
         {
             //FullName=name;
             HttpContext.Session.SetString("name",name);
+            
         }
     }
 }
