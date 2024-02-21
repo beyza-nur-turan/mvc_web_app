@@ -16,15 +16,27 @@ namespace Repositories
         {
 
         }
+        public void AttachRange(IEnumerable<object> entities)
+    {
+        foreach (var entity in entities)
+        {
+            Entry(entity).State = EntityState.Unchanged;
+        }
+    }
+        public void SaveChanges()
+        {
+            base.SaveChanges();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             //alternatif yol
             // modelBuilder.ApplyConfiguration(new ProductConfig());
             // modelBuilder.ApplyConfiguration(new CategoryConfig());
-           //üstteki yolda hepsini tek tek tanımlamamız gerekecekti ama altta 
-           //ne kadar varsa hepsinin ayarlamasını yapıyor.
-           modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); 
-        } 
+            //üstteki yolda hepsini tek tek tanımlamamız gerekecekti ama altta 
+            //ne kadar varsa hepsinin ayarlamasını yapıyor.
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
     }
 }

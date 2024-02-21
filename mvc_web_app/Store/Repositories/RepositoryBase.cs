@@ -43,5 +43,9 @@ namespace Repositories.Contracts
         {
             _context.Set<T>().Update(entity);
         }
+         public void SaveChanges()
+    {
+        _context.SaveChanges();
+    }
     }
 }
